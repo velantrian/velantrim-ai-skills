@@ -21,6 +21,21 @@ Classify each page as one or more of:
 
 `SOURCE_OF_TRUTH`, `CURRENT_PROJECTION`, `MIRROR`, `PLANNING_ONLY`, `HISTORICAL_RECORD`, `EVIDENCE_SURFACE`, `NON_AUTHORITATIVE`, `UNKNOWN`.
 
+## Optionality / prerequisite rule
+
+Notion is not a merge, release, deployment, experiment, or runtime prerequisite merely because this skill can audit Notion.
+
+Only treat a Notion action/state as a prerequisite when the target project's own authority model explicitly assigns that role.
+
+If no such role exists:
+
+- do not invent a required Notion synchronization gate;
+- do not use personal/workspace read-back as independent review;
+- do not treat connector availability as a correctness or merge-control dependency;
+- mark the Notion section `NOT_ASSESSED` when it is genuinely out of scope.
+
+If the relevant Notion surface is expected but inaccessible, report `UNKNOWN` instead of inferring absence, freshness, staleness, or disabled synchronization.
+
 ## Current vs historical
 
 - [ ] Current block is clearly identifiable.
