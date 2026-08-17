@@ -47,7 +47,12 @@ Strong evidence plus a bounded inference, but not fully reproduced.
 ### Low confidence
 Plausible hypothesis needing targeted verification.
 
-Never present low-confidence inference as a confirmed defect.
+### Unknown confidence
+The relevant evidence surface cannot currently be accessed, reproduced, or classified well enough to assign evidentiary confidence.
+
+Use `Unknown` for inaccessible or genuinely unobservable state. Do **not** downgrade inaccessible state to `Low`: low confidence means there is some weak evidence, while unknown confidence means the required evidence is not available.
+
+Never present low-confidence inference or unknown state as a confirmed defect.
 
 ## Evidence hierarchy
 
