@@ -29,14 +29,27 @@ For every required check:
 
 - [ ] Exact visible check name identified.
 - [ ] Name is unique and stable.
-- [ ] Check exists on every applicable PR.
+- [ ] Check exists on every applicable PR/ref/head class.
 - [ ] No path filter can make the required check disappear.
 - [ ] No `if:` condition can silently omit it.
-- [ ] Fork PR / secret behavior is safe.
+- [ ] Fork/restricted PR behavior is safe.
 - [ ] Failure blocks merge.
 - [ ] Cancellation blocks merge or is explicitly handled.
 - [ ] Unexpected skipped/absent dependency cannot silently pass.
 - [ ] Ruleset can actually see/select the check.
+
+### External status providers
+
+If a required context is emitted by an external GitHub App, service, or status provider rather than repository-local workflow code, verify separately:
+
+- [ ] provider/app is installed or otherwise available in every applicable repository/ref/PR context;
+- [ ] the exact context name is stable and unique;
+- [ ] the provider actually emits the context for every policy-applicable head class;
+- [ ] ruleset visibility/scope matches provider scope;
+- [ ] transferred/forked/new-ref/queue contexts are assessed when they exist;
+- [ ] inaccessible provider configuration is reported `UNKNOWN`, not inferred absent or safe.
+
+A status observed on one ordinary internal PR does not prove that the provider can satisfy a universal required-check policy.
 
 ## Maintainer topology
 
