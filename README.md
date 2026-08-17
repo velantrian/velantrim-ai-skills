@@ -1,69 +1,146 @@
 # 🧩 Velantrim AI Skills
 
-Reusable, project-neutral AI operational skills for repository auditing, CI and governance review, GitHub ↔ Notion truth routing, reproducibility, evidence validation, documentation quality, risk analysis, and engineering workflows.
+> **Reusable, project-neutral AI operational skills for repository auditing, CI/governance review, truth routing, reproducibility, evidence validation, documentation quality, risk analysis, and bounded engineering workflows.**
 
-## 🎯 Purpose
+🌍 Built for Velantrim projects **and** other software/research repositories.  
+🔒 Read-only by default.  
+🧭 Target-project authority always wins over generic skill guidance.  
+🤖 AI entry point: [`docs/ai/README.md`](docs/ai/README.md)
 
-This repository is a neutral tooling layer. Skills stored here may inspect or assist other projects, but they do **not** become part of those projects' architecture and do **not** inherit authority from them.
+---
 
-The repository is intended to support Velantrim projects and other software or research repositories where repeatable, evidence-based AI workflows are useful.
+## 👤 Start here — what is this?
 
-## 🧭 Boundaries
+`velantrim-ai-skills` is a neutral tooling repository for reusable AI procedures.
 
-This repository is **not** part of the architecture of:
+A skill from this repository can inspect a project, help structure an audit, compare GitHub with connected documentation, identify CI/governance risks, or propose bounded remediation. It does **not** become part of the inspected project's architecture and does **not** inherit authority from it.
 
-- Velantrim Native Kernel;
-- Velantrim Titan;
-- Velantrim Exo-Cortex Crystal;
-- Mentaury Soul;
-- Mentaury Kernel;
-- Velantrim Continuum;
-- or any other repository inspected by a skill.
-
-A skill may read a target project's source, documentation, tests, CI, governance and connected knowledge surfaces when authorized. The target project's own rules remain authoritative.
-
-## 🔒 Default operating mode
+Think of it as an external toolbox:
 
 ```text
-project-specific authority > generic skill defaults
-read-only by default
-writes require explicit authorization
-unknown state stays UNKNOWN
-recommendation ≠ authorization
-CI success ≠ production readiness
-sync metadata ≠ runtime evidence
+                     🧩 Velantrim AI Skills
+                              │
+                    neutral external tooling
+                              │
+          ┌───────────────────┼───────────────────┐
+          ▼                   ▼                   ▼
+     🔍 Audit skills      ⚙️ CI/governance    📚 Truth routing
+          │                   │                   │
+          └───────────────────┼───────────────────┘
+                              ▼
+                    🧭 Inspect target project
+                              │
+                              ▼
+                  project-specific authority
+                         remains in control
 ```
 
-Skills must not silently change repositories, external systems, governance settings, issues, pull requests, or documentation merely because a remediation appears obvious.
+---
 
-## 🧰 Repository structure
+## 🌳 Repository tree
 
 ```text
-velantrim-ai-skills/
-├── README.md
-├── README.ru.md
-├── AGENTS.md
-└── skills/
-    ├── README.md
-    └── github-notion-repository-audit/
-        ├── SKILL.md
-        ├── references/
-        └── templates/
+🧩 velantrim-ai-skills/
+├── 📖 README.md                    # human-first English entry
+├── 📖 README.ru.md                 # human-first Russian entry
+├── 🤖 AGENTS.md                    # repository-wide AI operating boundaries
+├── 🤖 docs/
+│   └── ai/
+│       └── README.md               # compact AI entry + reading order
+└── 🧰 skills/
+    ├── README.md                   # skill catalogue entry
+    └── 🔍 github-notion-repository-audit/
+        ├── SKILL.md                # canonical audit methodology
+        ├── references/             # focused checklists/guidance
+        └── templates/              # reusable report/finding/remediation forms
 ```
+
+---
 
 ## 🔍 First reusable skill
 
-[`skills/github-notion-repository-audit/`](skills/github-notion-repository-audit/SKILL.md) is the first neutral skill in this repository.
+### [`github-notion-repository-audit`](skills/github-notion-repository-audit/SKILL.md)
 
-It provides an evidence-based audit method for GitHub repositories and connected Notion/documentation surfaces, including live-first baselining, authority discovery, merge-governance review, CI gate/deadlock analysis, tests, truth routing, reproducibility, supply-chain review, and bounded remediation planning.
+A project-neutral, evidence-based method for auditing repositories whose operational truth may span GitHub, Notion or other documentation surfaces, CI, tests, governance, source code, reproducibility and supply-chain state.
 
-The skill is intentionally project-neutral. It does not contain target-project SHAs, experiment names, page IDs, operator decisions, or one project's architecture vocabulary.
+It covers, when relevant:
+
+- 🧭 live-first baselining and authority discovery;
+- 🔐 branch/ruleset/merge-governance review;
+- ⚙️ CI gate and deadlock analysis;
+- 🧪 supported test execution and negative-test gaps;
+- 📚 GitHub ↔ Notion/documentation truth routing;
+- 🔁 per-role freshness instead of one misleading global sync marker;
+- 📦 dependency and reproducibility review;
+- 🧯 declared limitation vs newly discovered defect;
+- 🛠️ minimal remediation + Definition of Done;
+- 🚦 explicit recommendation/authorization boundaries.
+
+The skill intentionally does **not** hard-code target-project SHAs, issue numbers, experiment names, page IDs, architecture vocabulary, reviewer policy, runtime, language, or database assumptions.
+
+---
+
+## 🔒 Operating boundaries
+
+```text
+project-specific authority  >  generic skill defaults
+read-only by default
+writes require explicit authorization
+UNKNOWN stays UNKNOWN
+recommendation != authorization
+CI success != production readiness
+mirror/sync metadata != runtime evidence
+ordinary review != specialized independent qualification
+public repository != open-source license
+```
+
+Skills must not silently change repositories, external systems, governance settings, issues, pull requests, CI, releases, or documentation merely because a remediation appears obvious.
+
+This repository is **not** part of the architecture of Native Kernel, Titan, Crystal, Mentaury, Continuum, or any other inspected project. Those names are examples of possible consumers, not authority relationships.
+
+---
+
+## 🤖 For AI agents
+
+Do **not** reconstruct operating rules from this README alone.
+
+Use this reading order:
+
+```text
+1. AGENTS.md
+2. docs/ai/README.md
+3. skills/README.md
+4. selected skill/SKILL.md
+5. selected skill/references/* as needed
+6. selected skill/templates/* when producing output
+7. target project's own authority/governance docs
+```
+
+The dedicated AI entry point contains a compact structured summary and explains when project-specific rules override this repository.
+
+➡️ [`docs/ai/README.md`](docs/ai/README.md)
+
+---
 
 ## 📚 Authority model
 
-For this repository itself, GitHub is the technical source of truth for versioned skill content and history.
+For **this repository**, GitHub is the technical source of truth for versioned skill content and history.
 
-For any repository being inspected, the skill must discover that project's authority hierarchy rather than imposing one from Velantrim AI Skills.
+For **any repository being inspected**, the selected skill must discover that project's authority hierarchy instead of imposing one from Velantrim AI Skills.
+
+No generic skill can promote itself into target-project authority.
+
+---
+
+## 🧠 Why no `project-state.json` yet?
+
+A separate machine-state file would only be useful if this repository develops meaningful changing operational state that automation must consume.
+
+Today the repository mainly contains versioned methodologies. Adding a JSON state file now would duplicate Markdown truth and create another drift surface. The AI entry therefore uses concise structured metadata inside Markdown instead.
+
+If genuine machine-state appears later, add a versioned JSON schema deliberately rather than using JSON as decorative duplication.
+
+---
 
 ## ⚖️ License
 
