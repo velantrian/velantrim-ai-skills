@@ -44,12 +44,20 @@ velantrim-ai-skills/
 ├── README.ru.md
 ├── AGENTS.md
 └── skills/
-    └── README.md
+    ├── README.md
+    └── github-notion-repository-audit/
+        ├── SKILL.md
+        ├── references/
+        └── templates/
 ```
 
-Individual reusable skills will live under `skills/<skill-name>/`.
+## 🔍 First reusable skill
 
-The first planned skill is a project-neutral GitHub + Notion repository audit methodology. Its implementation is intentionally not embedded in this bootstrap commit.
+[`skills/github-notion-repository-audit/`](skills/github-notion-repository-audit/SKILL.md) is the first neutral skill in this repository.
+
+It provides an evidence-based audit method for GitHub repositories and connected Notion/documentation surfaces, including live-first baselining, authority discovery, merge-governance review, CI gate/deadlock analysis, tests, truth routing, reproducibility, supply-chain review, and bounded remediation planning.
+
+The skill is intentionally project-neutral. It does not contain target-project SHAs, experiment names, page IDs, operator decisions, or one project's architecture vocabulary.
 
 ## 📚 Authority model
 
