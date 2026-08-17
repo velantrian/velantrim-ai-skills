@@ -1,39 +1,78 @@
 # 🧩 Velantrim AI Skills
 
-> **Reusable, project-neutral AI operational skills for repository auditing, CI/governance review, truth routing, reproducibility, evidence validation, documentation quality, risk analysis, and bounded engineering workflows.**
+> **Reusable, project-neutral AI operational skills and role guidance for repository auditing, analysis, implementation, adversarial review, verification, CI/governance, truth routing, reproducibility, and bounded engineering workflows.**
 
 🌍 Built for Velantrim projects **and** other software/research repositories.  
 🔒 Read-only by default.  
-🧭 Target-project authority always wins over generic skill guidance.  
+🧭 Target-project authority always wins over generic role/skill guidance.  
+🎭 AI role router: [`roles/README.md`](roles/README.md)  
 🤖 AI entry point: [`docs/ai/README.md`](docs/ai/README.md)
 
 ---
 
 ## 👤 Start here — what is this?
 
-`velantrim-ai-skills` is a neutral tooling repository for reusable AI procedures.
+`velantrim-ai-skills` is a neutral external toolbox for AI agents.
 
-A skill from this repository can inspect a project, help structure an audit, compare GitHub with connected documentation, identify CI/governance risks, or propose bounded remediation. It does **not** become part of the inspected project's architecture and does **not** inherit authority from it.
+It contains two complementary layers:
 
-Think of it as an external toolbox:
+- 🎭 **roles** — define what an AI is responsible for in the current stage and what it must not silently do;
+- 🧰 **skills** — reusable methodologies/checklists for performing a specific kind of work.
+
+A role or skill can help inspect, reason about, change, attack, or verify a project, but it **does not become part of that project's architecture and does not inherit authority from it**.
 
 ```text
-                     🧩 Velantrim AI Skills
-                              │
-                    neutral external tooling
-                              │
-          ┌───────────────────┼───────────────────┐
-          ▼                   ▼                   ▼
-     🔍 Audit skills      ⚙️ CI/governance    📚 Truth routing
-          │                   │                   │
-          └───────────────────┼───────────────────┘
-                              ▼
-                    🧭 Inspect target project
-                              │
-                              ▼
-                  project-specific authority
-                         remains in control
+                         🧩 Velantrim AI Skills
+                                  │
+                    neutral external tooling layer
+                                  │
+                 ┌────────────────┴────────────────┐
+                 ▼                                 ▼
+          🎭 WHO should AI be?               🧰 HOW should it work?
+              roles/                               skills/
+                 │                                 │
+      ┌──────────┼──────────┐                      │
+      ▼          ▼          ▼                      ▼
+   🔍 Audit   🛠️ Build   🧨 Attack          reusable methodology
+      │          │          │                      │
+      └──────────┴────┬─────┴──────────────────────┘
+                      ▼
+             🧭 target project
+                      │
+                      ▼
+          project-specific authority wins
 ```
+
+---
+
+## 🎭 AI roles — separation of duties
+
+When an AI receives a task, it should either use the role explicitly assigned by the user or consult the [Role Router](roles/README.md).
+
+```text
+🔍 AUDITOR      → What is true now?
+🧠 ANALYST      → What does the evidence mean?
+🛠️ IMPLEMENTER  → How do I apply the authorized bounded change?
+🧨 RED TEAM     → How can this fail or be bypassed?
+🧪 VERIFIER     → Is the claimed result actually proven?
+🧭 COORDINATOR  → Who should do what, in what order?
+```
+
+The important separation is:
+
+```text
+finding a problem
+      !=
+proving its root cause
+      !=
+implementing the fix
+      !=
+independently attacking/verifying the fix
+```
+
+For material work, the same model may perform author self-checks, but those are not independent verification. A different actor/model/provider—or at least a fresh isolated context that re-fetches evidence—is preferable for Red Team and Verifier roles.
+
+➡️ [`roles/README.md`](roles/README.md)
 
 ---
 
@@ -43,10 +82,18 @@ Think of it as an external toolbox:
 🧩 velantrim-ai-skills/
 ├── 📖 README.md                    # human-first English entry
 ├── 📖 README.ru.md                 # human-first Russian entry
-├── 🤖 AGENTS.md                    # repository-wide AI operating boundaries
+├── 🤖 AGENTS.md                    # repository-wide AI boundaries
 ├── 🤖 docs/
 │   └── ai/
-│       └── README.md               # compact AI entry + reading order
+│       └── README.md               # compact AI entry + routing
+├── 🎭 roles/
+│   ├── README.md                   # role router
+│   ├── 🔍 auditor.md
+│   ├── 🧠 analyst.md
+│   ├── 🛠️ implementer.md
+│   ├── 🧨 red-team.md
+│   ├── 🧪 verifier.md
+│   └── 🧭 coordinator.md
 └── 🧰 skills/
     ├── README.md                   # skill catalogue entry
     └── 🔍 github-notion-repository-audit/
@@ -67,7 +114,7 @@ It covers, when relevant:
 
 - 🧭 live-first baselining and authority discovery;
 - 🔐 branch/ruleset/merge-governance review;
-- ⚙️ CI gate and deadlock analysis;
+- ⚙️ CI gate, false-pass and deadlock analysis;
 - 🧪 supported test execution and negative-test gaps;
 - 📚 GitHub ↔ Notion/documentation truth routing;
 - 🔁 per-role freshness instead of one misleading global sync marker;
@@ -80,23 +127,48 @@ The skill intentionally does **not** hard-code target-project SHAs, issue number
 
 ---
 
+## ⚡ Example: efficient multi-AI workflow
+
+```text
+              ┌── 🔍 code/GitHub audit ──┐
+START ────────┼── 🔍 CI/governance ──────┼──► 🧠 ANALYST
+              └── 🔍 docs/knowledge ──────┘         │
+                                                     ▼
+                                              👤 authority GO
+                                                     │
+                                                     ▼
+                                              🛠️ IMPLEMENTER
+                                                     │
+                                          ┌──────────┴──────────┐
+                                          ▼                     ▼
+                                     🧨 RED TEAM            🧪 VERIFIER
+                                          └──────────┬──────────┘
+                                                     ▼
+                                              🧭 reconcile
+```
+
+Read-only audit lanes may run in parallel. Implementation should begin only after evidence is reconciled and the required authority exists. Red Team and independent verification should not be silently collapsed into the authoring session when independence matters.
+
+---
+
 ## 🔒 Operating boundaries
 
 ```text
-project-specific authority  >  generic skill defaults
+project-specific authority > generic role/skill defaults
 read-only by default
+role assignment != authority
+IMPLEMENTER role != write permission
 writes require explicit authorization
 UNKNOWN stays UNKNOWN
 recommendation != authorization
+AUTHOR_SELF_CHECK != INDEPENDENT_VERIFICATION
 CI success != production readiness
 mirror/sync metadata != runtime evidence
 ordinary review != specialized independent qualification
 public repository != open-source license
 ```
 
-Skills must not silently change repositories, external systems, governance settings, issues, pull requests, CI, releases, or documentation merely because a remediation appears obvious.
-
-This repository is **not** part of the architecture of Native Kernel, Titan, Crystal, Mentaury, Continuum, or any other inspected project. Those names are examples of possible consumers, not authority relationships.
+This repository is **not** part of the architecture of Native Kernel, Titan, Crystal, Mentaury, Continuum, or any other target project. Those names are possible consumers, not authority relationships.
 
 ---
 
@@ -109,14 +181,15 @@ Use this reading order:
 ```text
 1. AGENTS.md
 2. docs/ai/README.md
-3. skills/README.md
-4. selected skill/SKILL.md
-5. selected skill/references/* as needed
-6. selected skill/templates/* when producing output
-7. target project's own authority/governance docs
+3. roles/README.md
+4. selected roles/<role>.md
+5. skills/README.md              # when a reusable methodology is needed
+6. selected skill/SKILL.md
+7. relevant references/templates
+8. target project's own authority/governance docs
 ```
 
-The dedicated AI entry point contains a compact structured summary and explains when project-specific rules override this repository.
+The AI entry point contains compact structured metadata and the exact routing rule.
 
 ➡️ [`docs/ai/README.md`](docs/ai/README.md)
 
@@ -124,19 +197,19 @@ The dedicated AI entry point contains a compact structured summary and explains 
 
 ## 📚 Authority model
 
-For **this repository**, GitHub is the technical source of truth for versioned skill content and history.
+For **this repository**, GitHub is the technical source of truth for versioned role/skill content and history.
 
-For **any repository being inspected**, the selected skill must discover that project's authority hierarchy instead of imposing one from Velantrim AI Skills.
+For **any target repository**, roles and skills must discover that project's authority hierarchy rather than imposing one from Velantrim AI Skills.
 
-No generic skill can promote itself into target-project authority.
+No generic role or skill can promote itself into target-project authority.
 
 ---
 
 ## 🧠 Why no `project-state.json` yet?
 
-A separate machine-state file would only be useful if this repository develops meaningful changing operational state that automation must consume.
+A separate machine-state file is useful only if this repository develops meaningful changing operational state that automation must consume.
 
-Today the repository mainly contains versioned methodologies. Adding a JSON state file now would duplicate Markdown truth and create another drift surface. The AI entry therefore uses concise structured metadata inside Markdown instead.
+Today it mainly contains versioned methodologies and role guidance. A JSON state file would duplicate Markdown truth and create another drift surface. The AI entry therefore uses concise structured YAML metadata inside Markdown.
 
 If genuine machine-state appears later, add a versioned JSON schema deliberately rather than using JSON as decorative duplication.
 
