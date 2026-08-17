@@ -16,7 +16,7 @@ For each relevant workflow record:
 - `if:` expressions;
 - `continue-on-error`;
 - permissions;
-- secrets;
+- credentials requirements;
 - services/containers;
 - concurrency/cancellation;
 - artifacts;
@@ -38,12 +38,34 @@ For every mandatory dependency, answer explicitly:
 
 Do not assume default GitHub semantics are sufficient without verifying the actual workflow graph.
 
+## Fork and restricted-context checks
+
+A job that cannot run for some applicable pull-request sources must not be made universally required unless the repository has an explicit safe policy for that path.
+
+Classify first:
+
+```text
+job runs safely for all applicable PRs
+→ eligible for required-check evaluation
+
+job is intentionally unavailable for some PR sources
+→ model that path explicitly
+
+job is required but cannot run for an applicable PR
+→ merge-deadlock risk
+
+availability cannot be verified
+→ UNKNOWN
+```
+
+Do not weaken repository security boundaries merely to make a required check runnable.
+
 ## Deadlock checks
 
 - [ ] Required check always exists on applicable PRs.
 - [ ] Path filters cannot remove the final required check.
 - [ ] Conditional jobs have an explicit neutral/required interpretation.
-- [ ] Fork PRs do not depend on unavailable secrets for mandatory checks.
+- [ ] Fork/restricted PRs can satisfy every universally required check.
 - [ ] Matrix check names are not ambiguous.
 - [ ] Duplicate job names across workflows do not collide.
 - [ ] Strict branch-up-to-date policy is compatible with the workflow trigger model.
