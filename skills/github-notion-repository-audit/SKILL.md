@@ -12,6 +12,61 @@ This skill is **external tooling**. It does not become part of the architecture,
 
 Do not modify repositories, branches, pull requests, issues, rulesets, CI settings, Notion pages, releases, or external systems unless the user explicitly authorizes the exact write scope.
 
+## ⚡ Quick start
+
+Use this skill when the user asks for a deep repository audit, GitHub/governance/CI review, GitHub ↔ Notion/documentation consistency check, reproducibility review, or evidence-backed remediation assessment.
+
+### Read first
+
+```text
+1. target repository live state
+2. target project's AGENTS/governance/current-state docs, if present
+3. this SKILL.md
+4. relevant references/*
+5. templates/* when producing the report
+```
+
+### Hard prohibitions in read-only mode
+
+Do not:
+
+- edit files or settings;
+- create branches, PRs, issues, releases, or Notion pages;
+- change rulesets/branch protection;
+- select a license;
+- convert a recommendation into authorization;
+- infer inaccessible state.
+
+### Minimum live baseline
+
+Before findings, establish when available:
+
+- repository/default branch/current HEAD;
+- commit verification state;
+- open PRs/issues/blockers;
+- CI/Actions state;
+- rulesets/branch protection;
+- project documentation and machine state;
+- connected knowledge surfaces;
+- supported local test environment.
+
+### Minimum output discipline
+
+Every material finding should identify:
+
+```text
+evidence
+→ confidence
+→ failure mode
+→ bounded impact
+→ minimal remediation
+→ Definition of Done
+→ authorization status
+→ explicit non-actions
+```
+
+If a surface cannot be verified, use `UNKNOWN` rather than guessing.
+
 ## Core operating principles
 
 1. **Live-first.** Previous audits, handoffs, memories, cached summaries, and planning documents are hypotheses to re-check, not absolute truth.
@@ -189,10 +244,36 @@ Examples of distinct concepts that must not be conflated:
 - compliance approval;
 - project-specific reviewer qualification.
 
+### Safe baseline for a single-maintainer repository
+
+This is a model to evaluate, not a universal prescription.
+
+Prefer controls that the current maintainer topology can actually satisfy:
+
+- require PR-based change flow when useful and available;
+- require stable CI/status checks only after proving they always run;
+- require conversation resolution only if the workflow can satisfy it without an unavailable reviewer;
+- do **not** require an external approval that no eligible actor can provide;
+- treat owner self-review/acknowledgment as ordinary process evidence only when the target project explicitly accepts it;
+- if genuine independence is required, report that work as blocked rather than pretending ordinary self-review satisfies it.
+
+### Stronger baseline for a multi-maintainer repository
+
+Use only after proving that eligible reviewers actually exist and the repository can sustain the policy:
+
+- require peer or code-owner review where project policy supports it;
+- define stale-approval and latest-push semantics explicitly;
+- require relevant stable checks;
+- require conversation resolution where appropriate;
+- inspect bypass actors and emergency paths;
+- keep scientific/security/regulatory independence separate unless the project explicitly binds those roles to GitHub review.
+
 If needed, recommend two configurations:
 
 - **immediate safe configuration** for current maintainer topology;
 - **stronger future configuration** once eligible reviewers exist.
+
+Neither model is automatic authorization to change repository settings.
 
 ---
 
@@ -470,6 +551,7 @@ Every finding should include:
 - impact;
 - minimal remediation;
 - Definition of Done;
+- authorization status / owner-decision dependency;
 - explicit non-actions / boundaries.
 
 Recommended status vocabulary:
