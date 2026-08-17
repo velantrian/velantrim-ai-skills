@@ -38,9 +38,9 @@ Use `finding.md` for each finding.
 
 ### Finding summary
 
-| ID | Severity | Class | Confidence | Priority | Short result |
-|---|---|---|---|---|---|
-|  |  |  |  |  |  |
+| ID | Severity | Class | Confidence | Priority | Authorization | Short result |
+|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |
 
 ## 5. Previous findings verification
 
@@ -131,6 +131,16 @@ Separate:
 
 Use `remediation-plan.md`.
 
+For every proposed action, state whether it is:
+
+- recommendation only;
+- explicitly authorized;
+- blocked pending owner/operator decision;
+- blocked pending external evidence;
+- not applicable.
+
+Do not infer authorization from severity, priority, or GO/NO-GO wording.
+
 ## 15. External / operator blockers
 
 | Blocker | Type | What cannot proceed | What evidence/decision is required |
@@ -139,16 +149,16 @@ Use `remediation-plan.md`.
 
 ## 16. GO / NO-GO matrix
 
-| Proposed action | Decision | Evidence / condition |
-|---|---|---|
-| Bounded repository hygiene |  |  |
-| CI/governance enforcement |  |  |
-| Refactoring |  |  |
-| Architecture changes |  |  |
-| Runtime/experiment execution |  |  |
-| License/contribution change |  |  |
+| Proposed action | Decision | Authorization status | Evidence / condition |
+|---|---|---|---|
+| Bounded repository hygiene |  |  |  |
+| CI/governance enforcement |  |  |  |
+| Refactoring |  |  |  |
+| Architecture changes |  |  |  |
+| Runtime/experiment execution |  |  |  |
+| License/contribution change |  |  |  |
 
-Use project-specific action names where appropriate. A `GO` is scope-limited; it is never blanket authorization.
+Use project-specific action names where appropriate. A `GO` is scope-limited and is not blanket authorization unless explicit write authority is separately established.
 
 ## 17. Final boundaries
 
