@@ -1,5 +1,13 @@
 # 🧩 Velantrim AI Skills
 
+> 🧩 **Reusable AI engineering checklists and roles for bounded, evidence-based repository work.**
+>
+> **Why:** An AI agent can jump from a plausible suggestion straight to implementation or approval. These project-neutral guides help distinguish investigation, review, testing and permission.
+>
+> **Example:** Review a PR and report findings without treating a passing check as authorization to merge.
+>
+> **Scope:** Read-only by default. Target repository rules take precedence; this repository currently does not declare a license.
+
 > **Reusable, project-neutral AI operational skills and role guidance for repository auditing, analysis, implementation, adversarial review, verification, CI/governance, truth routing, reproducibility, and bounded engineering workflows.**
 
 🌍 Built for Velantrim projects **and** other software/research repositories.  
